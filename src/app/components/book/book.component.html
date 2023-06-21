@@ -1,0 +1,53 @@
+<div style="margin-top: 20px; margin-left: 20px;"> 
+    <p>{{ Remaining() }} remaining out of {{ books.length }} total books</p>
+    <div *ngFor="let book of books; let i = index"> 
+      <div *ngIf="!book.isArchived">
+        <ul class="unstyled">
+          <li style="margin-top: 10px">
+            <div class="form-check">
+              <input style="margin-top: 10px" class="form-check-input" type="checkbox" [(ngModel)]="book.done"> 
+              <label class="form-check-label">
+                <span>{{ book.name }} ({{ book.pages }} pages)</span>
+                <button style="margin-left: 10px" type="button" class="btn btn-primary" data-bs-toggle="modal" [attr.data-bs-target]="'#modal' + i">See more</button>
+                <button style="margin-left: 10px" [(ngModel)]="isArchived" class="btn btn-success" (click)="Archive(book)">Archive</button>
+                <button style="margin-left: 10px;" class="btn btn-danger" (click)="Delete(book)">Delete</button>
+              </label>
+            </div> 
+            <div class="modal fade" [id]="'modal' + i" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">{{book.name}}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">{{book.description}}</div>
+                  <div class="modal-footer">{{book.pages}} pages</div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div style="display: grid; max-width: 400px">
+      <input style="margin-top: 10px" [(ngModel)]="name" placeholder="Name of the book" type="text"> 
+      <input style="margin-top: 10px" [(ngModel)]="description" placeholder="Description of the book" type="text">
+      <input style="margin-top: 10px" type="number" [(ngModel)]="pages" placeholder="Amount of pages"> 
+      <button style="margin-top: 10px" class="btn btn-success" (click)="addBook()">Add</button>
+    </div>
+    <div>
+        <button style="margin-top: 10px" class="btn btn-success" routerLink="archive">See archive</button>
+    </div>
+    <div style="margin-top: 20px;">
+      <p>Archived books:</p>
+      <div *ngFor="let book of books">
+        <ul *ngIf="book.isArchived">
+          <li>
+            <span>{{ book.name }}</span>
+            <button style="margin-left: 10px; font-size: small" class="btn btn-success" (click)="Unarchive(book)"><b>Unarchive</b></button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>

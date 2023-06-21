@@ -1,0 +1,14 @@
+<div style="margin-top: 20px; margin-left: 20px;">
+    <p>Archived books:</p>
+<div *ngFor="let book of books">
+    <ul *ngIf="book.isArchived is true">
+      <li>
+        <span>{{ book.name }}</span>
+        <button style="margin-left: 10px; font-size: small" class="btn btn-success" (click)="Unarchive(book)"><b>Unarchive</b></button>
+      </li>
+    </ul>
+    </div>
+    <div>
+    <button style="margin-top: 10px" class="btn btn-success" routerLink="/">Back to list</button>
+    </div>
+</div>
