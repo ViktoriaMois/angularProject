@@ -1,14 +1,27 @@
 <div style="margin-top: 20px; margin-left: 20px;">
     <p>Archived books:</p>
-<div *ngFor="let book of books">
+<div *ngFor="let book of books; let i = index">
     <ul *ngIf="book.isArchived is true">
       <li>
         <span>{{ book.name }}</span>
-        <button style="margin-left: 10px; font-size: small" class="btn btn-success" (click)="Unarchive(book)"><b>Unarchive</b></button>
+        <button style="margin-left: 5px; font-size: small" type="button" class="btn btn-success" data-bs-toggle="modal" [attr.data-bs-target]="'#modal' + i"><b>See more</b></button>
+        <button style="margin-left: 10px; font-size: small" class="btn btn-primary" (click)="Unarchive(book)"><b>Unarchive</b></button>
+        <div class="modal fade" [id]="'modal' + i" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">{{book.name}}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">{{book.description}}</div>
+              <div class="modal-footer">{{book.pages}} pages</div>
+            </div>
+          </div>
+        </div>
       </li>
     </ul>
-    </div>
-    <div>
+  </div>
+  <div>
     <button style="margin-top: 10px" class="btn btn-success" routerLink="/">Back to list</button>
-    </div>
+  </div>
 </div>

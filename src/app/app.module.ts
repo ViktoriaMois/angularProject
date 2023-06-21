@@ -17,7 +17,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     ArchiveComponent,
-    BookComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,

@@ -48,6 +48,7 @@ export class BookComponent{
       // this.books.splice(index, 1);
       this.archivedBooks.push(book);
       book.isArchived = true;
+      book.done = true;
     }
   }
 

@@ -7,9 +7,9 @@
             <div class="form-check">
               <input style="margin-top: 10px" class="form-check-input" type="checkbox" [(ngModel)]="book.done"> 
               <label class="form-check-label">
-                <span>{{ book.name }} ({{ book.pages }} pages)</span>
-                <button style="margin-left: 10px" type="button" class="btn btn-primary" data-bs-toggle="modal" [attr.data-bs-target]="'#modal' + i">See more</button>
-                <button style="margin-left: 10px" [(ngModel)]="isArchived" class="btn btn-success" (click)="Archive(book)">Archive</button>
+                <span><b><i>{{ book.name }}</i></b> by {{ book.author }}</span>
+                <button style="margin-left: 10px" type="button" class="btn btn-success" data-bs-toggle="modal" [attr.data-bs-target]="'#modal' + i">See more</button>
+                <button style="margin-left: 10px" [(ngModel)]="isArchived" class="btn btn-primary" (click)="Archive(book)">Archive</button>
                 <button style="margin-left: 10px;" class="btn btn-danger" (click)="Delete(book)">Delete</button>
               </label>
             </div> 
@@ -29,25 +29,22 @@
         </ul>
       </div>
     </div>
+    <div style="margin-top: 20px;">
+      <a routerLink="archive">Archived books:</a>
+      <div *ngFor="let book of books; let i = index" style="margin-top: 10px;">
+        <ul *ngIf="book.isArchived">
+          <li>
+            <span>{{ book.name }}</span>
+            <button style="margin-left: 5px; font-size: x-small" class="btn btn-primary" (click)="Unarchive(book)"><b>Unarchive</b></button>
+          </li>
+        </ul>
+      </div>
+    </div>
     <div style="display: grid; max-width: 400px">
       <input style="margin-top: 10px" [(ngModel)]="name" placeholder="Name of the book" type="text"> 
       <input style="margin-top: 10px" [(ngModel)]="description" placeholder="Description of the book" type="text">
       <input style="margin-top: 10px" type="number" [(ngModel)]="pages" placeholder="Amount of pages"> 
       <button style="margin-top: 10px" class="btn btn-success" (click)="addBook()">Add</button>
-    </div>
-    <div>
-        <button style="margin-top: 10px" class="btn btn-success" routerLink="archive">See archive</button>
-    </div>
-    <div style="margin-top: 20px;">
-      <p>Archived books:</p>
-      <div *ngFor="let book of books">
-        <ul *ngIf="book.isArchived">
-          <li>
-            <span>{{ book.name }}</span>
-            <button style="margin-left: 10px; font-size: small" class="btn btn-success" (click)="Unarchive(book)"><b>Unarchive</b></button>
-          </li>
-        </ul>
-      </div>
     </div>
   </div>
   <router-outlet></router-outlet>
